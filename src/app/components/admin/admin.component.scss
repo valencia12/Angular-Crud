@@ -1,0 +1,95 @@
+.registerContainer{
+  padding: 0px 40px;
+  .reg{
+    padding: 10px 20px;
+    background: transparent;
+    border: 2px solid green;
+    color: green;
+    border-radius: 5px;
+    font-size: 1em;
+  
+    &:hover{
+      cursor: pointer;
+      background-color: green;
+      color: white;
+    }
+  }
+}
+form{
+  margin: auto;
+  width: 500px;
+  div{
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    input{
+      font-size: 1em;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid rgb(212, 212, 212);
+    }
+  }
+
+  button{
+    background: transparent;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    border: 2px solid green;
+    border-radius: 5px;
+    font-size: 1em;
+    color: green;
+    &:hover{
+      cursor: pointer;
+      color: white;
+      background-color: green;
+    }
+    &.editBtn{
+      border: 2px solid rgb(255, 200, 0);
+      color: rgb(255, 200, 0);
+      &:hover{
+        cursor: pointer;
+        color: white;
+        background-color: rgb(255, 200, 0);
+      }
+    }
+    &.cancelBtn{
+      border: 2px solid red;
+      color: red;
+      &:hover{
+        cursor: pointer;
+        color: white;
+        background-color: red;
+      }
+    }
+  }  
+}
+table{
+  padding: 40px;
+  width: 100%;
+  text-align: center;
+  button{
+    padding: 10px;
+    color: white;
+    margin-right: 5px;
+    border-radius: 5px;
+    &.delete{
+      background-color: red;
+      border: 1px solid red;
+      &:hover{
+        border: 1px solid rgb(178, 2, 2);
+        background-color: rgb(178, 2, 2);
+        cursor: pointer;
+      }
+    }
+    &.edit{
+      background-color: rgb(255, 200, 0);
+      border: 1px solid rgb(255, 200, 0);
+      &:hover{
+        background-color: rgb(255, 170, 0);
+        border: 1px solid rgb(255, 170, 0);
+        cursor: pointer;
+      }
+    }
+  }
+}

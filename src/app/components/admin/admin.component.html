@@ -1,0 +1,158 @@
+<div class="registerContainer">
+  <button routerLink="/register" class="reg">Registers</button>
+</div>
+<form [formGroup]="addForm">
+  <div>
+    <label for="firstName">First Name * </label>
+    <input
+      formControlName="firstName"
+      type="text"
+      id="firstName"
+      placeholder="Jorge"
+      required
+    />
+  </div>
+  <div>
+    <label for="lastName">Last Name * </label>
+    <input
+      formControlName="lastName"
+      type="text"
+      id="lastName"
+      placeholder="Miranda"
+      required
+    />
+  </div>
+  <div>
+    <label for="birthday">Birthday * </label>
+    <input formControlName="birthday" type="date" id="birthday" required />
+  </div>
+  <div>
+    <label for="costumerId">Costumer ID * </label>
+    <input
+      formControlName="costumerId"
+      type="text"
+      id="costumerId"
+      placeholder=""
+      required
+    />
+  </div>
+  <div>
+    <label for="country">Country * </label>
+    <input
+      formControlName="country"
+      type="text"
+      id="country"
+      placeholder="El Salvador"
+      required
+    />
+  </div>
+  <div>
+    <label for="cellphone">Cellphone * </label>
+    <input
+      formControlName="cellphone"
+      type="text"
+      id="cellphone"
+      placeholder="7777-7777"
+      minlength="9"
+      maxlength="9"
+      required
+    />
+  </div>
+  <div>
+    <label for="homePhone">Home Phone * </label>
+    <input
+      formControlName="homePhone"
+      type="text"
+      id="homePhone"
+      placeholder="7777-7777"
+      minlength="9"
+      maxlength="9"
+      required
+    />
+  </div>
+  <div>
+    <label for="profession">Profession *</label>
+    <input
+      formControlName="profession"
+      type="text"
+      id="profession"
+      placeholder="Engineer"
+      required
+    />
+  </div>
+  <div>
+    <label for="incomes">Incomes *</label>
+    <input
+      formControlName="incomes"
+      type="text"
+      id="incomes"
+      placeholder="$$"
+      required
+    />
+  </div>
+  <div>
+    <label for="address">Address Home *</label>
+    <input
+      formControlName="address"
+      type="text"
+      id="address"
+      placeholder=""
+      required
+    />
+  </div>
+
+  <button *ngIf="!editFlag" type="submit" (click)="onSubmit()">Add</button>
+  <button *ngIf="editFlag" class="editBtn" type="submit" (click)="onEdit()">
+    Edit
+  </button>
+  <button
+    *ngIf="editFlag"
+    class="cancelBtn"
+    type="button"
+    (click)="cancelEdit()"
+  >
+    Cancel
+  </button>
+</form>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Birthday</th>
+    <th>Country</th>
+    <th>Contact</th>
+    <th>Profession</th>
+    <th>Income</th>
+    <th>Address</th>
+    <th>opt</th>
+  </tr>
+  <tr *ngFor="let customer of list">
+    <td>{{ customer.customerId }}</td>
+    <td>{{ customer.firstName }} {{ customer.lastName }}</td>
+    <td>{{ customer.birthday }}</td>
+    <td>{{ customer.country }}</td>
+    <td>{{ customer.cellphone }}, {{ customer.homePhone }}</td>
+    <td>{{ customer.profession }}</td>
+    <td>{{ customer.incomes | currency }}</td>
+    <td>{{ customer.address }}</td>
+    <td>
+      <button
+        class="edit"
+        #editBtn
+        [value]="customer.customerId"
+        (click)="populateEditForm(editBtn.value)"
+      >
+        <i class="ri-pencil-line"></i>
+      </button>
+      <button
+        class="delete"
+        #deleteBtn
+        [value]="customer.customerId"
+        (click)="deleteCustomer(deleteBtn.value)"
+      >
+        <i class="ri-delete-bin-line"></i>
+      </button>
+    </td>
+  </tr>
+</table>

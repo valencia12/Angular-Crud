@@ -1,0 +1,28 @@
+nav{
+  padding: 20px 40px;
+  border-bottom: 1px solid rgb(178, 178, 178);
+  margin-bottom: 30px;
+  a{
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    padding: 10px 20px;
+    border-radius: 10px;
+    &:hover{
+      color: white;
+      background-color: black;
+    }
+  }
+  ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    font-size: 1.5em;
+    align-items: center;
+    .moving{
+      margin-left: auto;
+    }
+  }
+}
