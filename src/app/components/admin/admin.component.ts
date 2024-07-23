@@ -11,27 +11,31 @@ import { CustomerListService } from 'src/app/services/customer-list.service';
 export class AdminComponent implements OnInit {
   editFlag = false;
   list: Customer[] = [];
-  addForm: FormGroup = new FormGroup({});
+  addForm: FormGroup;
+
   constructor(
     private fb: FormBuilder,
-    private costumerList: CustomerListService
-  ) {}
+    private customerList: CustomerListService
+  ) {
+    this.addForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      birthday: ['', Validators.required],
+      costumerId: [{ value: '', disabled: true }, Validators.required],
+      country: ['', Validators.required],
+      cellphone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+      homePhone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+      profession: ['', Validators.required],
+      incomes: ['', Validators.required],
+      address: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
-    this.list = this.costumerList.getCustomers();
-    this.addForm = this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      birthday: ['', [Validators.required]],
-      costumerId: [`${this.costumerList.getNewId()}`, [Validators.required]],
-      country: ['', [Validators.required]],
-      cellphone: ['', [Validators.required]],
-      homePhone: ['', [Validators.required]],
-      profession: ['', [Validators.required]],
-      incomes: ['', [Validators.required]],
-      address: ['', [Validators.required]],
+    this.list = this.customerList.getCustomers();
+    this.addForm.patchValue({
+      costumerId: this.customerList.getNewId(),
     });
-    this.f['costumerId'].disable();
   }
 
   get f() {
@@ -40,84 +44,71 @@ export class AdminComponent implements OnInit {
 
   onSubmit() {
     if (this.addForm.invalid) {
-      alert('Please fill in all the fields');
-      return;
+      return; // Prevent submission
     }
 
-    const firstName = this.f['firstName'].value;
-    const lastName = this.f['lastName'].value;
-    const birthday = this.f['birthday'].value;
-    const costumerId = this.f['costumerId'].value;
-    const country = this.f['country'].value;
-    const cellphone = this.f['cellphone'].value;
-    const homePhone = this.f['homePhone'].value;
-    const profession = this.f['profession'].value;
-    const incomes = this.f['incomes'].value;
-    const address = this.f['address'].value;
-    let costumer: Customer = {
-      firstName: firstName,
-      lastName: lastName,
-      birthday: birthday,
-      customerId: costumerId,
-      country: country,
-      cellphone: cellphone,
-      homePhone: homePhone,
-      profession: profession,
-      incomes: incomes,
-      address: address,
+    const customer: Customer = {
+      firstName: this.f['firstName'].value,
+      lastName: this.f['lastName'].value,
+      birthday: this.f['birthday'].value,
+      customerId: this.f['costumerId'].value,
+      country: this.f['country'].value,
+      cellphone: this.f['cellphone'].value,
+      homePhone: this.f['homePhone'].value,
+      profession: this.f['profession'].value,
+      incomes: this.f['incomes'].value,
+      address: this.f['address'].value,
     };
 
-    this.costumerList.addCustomer(costumer);
-    this.list = this.costumerList.getCustomers();
+    if (this.editFlag) {
+      this.customerList.editCustomer(customer);
+    } else {
+      this.customerList.addCustomer(customer);
+    }
+
+    this.list = this.customerList.getCustomers();
     this.clearForm();
   }
 
   populateEditForm(id: string) {
     this.editFlag = true;
-    const customer = this.costumerList.getCustomer(id);
-    this.f['firstName'].setValue(customer?.firstName);
-    this.f['lastName'].setValue(customer?.lastName);
-    this.f['birthday'].setValue(customer?.birthday);
-    this.f['costumerId'].setValue(customer?.customerId);
-    this.f['costumerId'].disable();
-    this.f['country'].setValue(customer?.country);
-    this.f['cellphone'].setValue(customer?.cellphone);
-    this.f['homePhone'].setValue(customer?.homePhone);
-    this.f['profession'].setValue(customer?.profession);
-    this.f['incomes'].setValue(customer?.incomes);
-    this.f['address'].setValue(customer?.address);
+    const customer = this.customerList.getCustomer(id);
+    if (customer) {
+      this.addForm.patchValue({
+        firstName: customer.firstName,
+        lastName: customer.lastName,
+        birthday: customer.birthday,
+        costumerId: customer.customerId,
+        country: customer.country,
+        cellphone: customer.cellphone,
+        homePhone: customer.homePhone,
+        profession: customer.profession,
+        incomes: customer.incomes,
+        address: customer.address,
+      });
+    }
   }
 
   onEdit() {
     if (this.addForm.invalid) {
-      alert('Please fill in all the fields');
-      return;
+      return; // Prevent submission
     }
-    const firstName = this.f['firstName'].value;
-    const lastName = this.f['lastName'].value;
-    const birthday = this.f['birthday'].value;
-    const costumerId = this.f['costumerId'].value;
-    const country = this.f['country'].value;
-    const cellphone = this.f['cellphone'].value;
-    const homePhone = this.f['homePhone'].value;
-    const profession = this.f['profession'].value;
-    const incomes = this.f['incomes'].value;
-    const address = this.f['address'].value;
-    let costumer: Customer = {
-      firstName: firstName,
-      lastName: lastName,
-      birthday: birthday,
-      customerId: costumerId,
-      country: country,
-      cellphone: cellphone,
-      homePhone: homePhone,
-      profession: profession,
-      incomes: incomes,
-      address: address,
+
+    const customer: Customer = {
+      firstName: this.f['firstName'].value,
+      lastName: this.f['lastName'].value,
+      birthday: this.f['birthday'].value,
+      customerId: this.f['costumerId'].value,
+      country: this.f['country'].value,
+      cellphone: this.f['cellphone'].value,
+      homePhone: this.f['homePhone'].value,
+      profession: this.f['profession'].value,
+      incomes: this.f['incomes'].value,
+      address: this.f['address'].value,
     };
 
-    this.costumerList.editCustomer(costumer);
-    this.list = this.costumerList.getCustomers();
+    this.customerList.editCustomer(customer);
+    this.list = this.customerList.getCustomers();
     this.cancelEdit();
   }
 
@@ -128,11 +119,21 @@ export class AdminComponent implements OnInit {
 
   clearForm() {
     this.addForm.reset();
-    this.f['costumerId'].setValue(this.costumerList.getNewId());
+    this.addForm.patchValue({
+      costumerId: this.customerList.getNewId(),
+    });
   }
 
   deleteCustomer(id: string) {
-    this.costumerList.deleteCustomer(id);
-    this.list = this.costumerList.getCustomers();
+    this.customerList.deleteCustomer(id);
+    this.list = this.customerList.getCustomers();
+  }
+
+  formatPhoneNumber(controlName: string) {
+    let phoneNumber = this.f[controlName].value;
+    if (phoneNumber && phoneNumber.length === 8 && !phoneNumber.includes('-')) {
+      phoneNumber = phoneNumber.slice(0, 4) + '-' + phoneNumber.slice(4);
+      this.f[controlName].setValue(phoneNumber);
+    }
   }
 }

@@ -1,27 +1,60 @@
 # Angular Crud
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.9.
+# Proyecto Angular - README
 
-## Development server
+## Autor
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+**Jorge Gustavo Miranda Valencia**
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Proyecto Angular
 
-## Build
+Este documento proporciona una guía para configurar y ejecutar el proyecto Angular, así como las versiones necesarias de las herramientas.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Requisitos
 
-## Running unit tests
+Antes de comenzar, asegúrate de tener instaladas las siguientes versiones de herramientas:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Node.js:** 16.x (o una versión compatible)
+- **Angular CLI:** 16.x (o una versión compatible)
 
-## Running end-to-end tests
+Para verificar las versiones instaladas, usa los siguientes comandos:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
 
-## Further help
+node --version
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+ng --version
+
+```
+
+## Configuracion inicial
+### Instalar dependencias
+```bash
+npm install
+```
+### Iniciar proyecto
+```bash
+ng serve
+```
+### Correr pruebas unitarias
+```bash
+ng test
+```
+
+## Configuracion Docker
+
+- Descargar proyecto
+
+```bash
+docker pull gustavomva/prueba:test
+```
+
+- Correr proyecto
+
+```bash
+docker run -d -p 80:8080 gustavomva/prueba:test
+```
+# Preguntas teoricas
+- https://docs.google.com/document/d/1HAKeIbXi-HXkq39ak6OdfLfc5pOXt-y8tVzFXfUieHI/edit?usp=sharing

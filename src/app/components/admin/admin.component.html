@@ -55,8 +55,14 @@
       placeholder="7777-7777"
       minlength="9"
       maxlength="9"
+      (blur)="formatPhoneNumber('cellphone')"
       required
     />
+    <div *ngIf="f['cellphone'].invalid && (f['cellphone'].dirty || f['cellphone'].touched)">
+      <small *ngIf="f['cellphone'].errors?.['required']">Cellphone is required.</small>
+      <small *ngIf="f['cellphone'].errors?.['minlength']">Cellphone must be 9 characters long.</small>
+      <small *ngIf="f['cellphone'].errors?.['maxlength']">Cellphone must be 9 characters long.</small>
+    </div>
   </div>
   <div>
     <label for="homePhone">Home Phone * </label>
@@ -67,8 +73,14 @@
       placeholder="7777-7777"
       minlength="9"
       maxlength="9"
+      (blur)="formatPhoneNumber('homePhone')"
       required
     />
+    <div *ngIf="f['homePhone'].invalid && (f['homePhone'].dirty || f['homePhone'].touched)">
+      <small *ngIf="f['homePhone'].errors?.['required']">Home Phone is required.</small>
+      <small *ngIf="f['homePhone'].errors?.['minlength']">Home Phone must be 9 characters long.</small>
+      <small *ngIf="f['homePhone'].errors?.['maxlength']">Home Phone must be 9 characters long.</small>
+    </div>
   </div>
   <div>
     <label for="profession">Profession *</label>
