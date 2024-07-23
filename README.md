@@ -1,12 +1,7 @@
-# Angular Crud
 
-# Proyecto Angular - README
+# Angular Crud- README
 
-## Autor
-
-**Jorge Gustavo Miranda Valencia**
-
----
+## Autor: Jorge Gustavo Miranda Valencia
 
 # Proyecto Angular
 
@@ -25,20 +20,22 @@ Para verificar las versiones instaladas, usa los siguientes comandos:
 
 node --version
 
+```
+```bash
+
 ng --version
 
 ```
-
 ## Configuracion inicial
-### Instalar dependencias
+- Instalar dependencias
 ```bash
 npm install
 ```
-### Iniciar proyecto
+- Iniciar proyecto
 ```bash
 ng serve
 ```
-### Correr pruebas unitarias
+- Correr pruebas unitarias
 ```bash
 ng test
 ```
